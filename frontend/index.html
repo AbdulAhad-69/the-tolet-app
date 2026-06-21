@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THE TOLET - House Rent Solution</title>
+    <link rel="stylesheet" href="css/tolet-style.css">
+</head>
+
+<body>
+
+    <header class="top-header">
+        <div class="logo">
+            <h2>THE TOLET</h2>
+            <p>House Rent Solution</p>
+        </div>
+
+        <nav>
+            <a href="index.html"><span>🏠</span> Home</a>
+            <div class="dropdown">
+                <a href="#" class="dropbtn">🏢 Property List ▼</a>
+                <div class="dropdown-content" id="propertyListDropdown">
+                    <a href="category-page.html?category=All">All Property</a>
+                </div>
+            </div>
+            <a href="profile.html">👤 Profile</a>
+            <a href="artical.html">📰 Article</a>
+        </nav>
+
+        <div class="header-btns">
+            <button onclick="window.location.href='add-property.html'">Add Property</button>
+            <button id="authBtn" onclick="handleAuthClick()">Login / Register</button>
+        </div>
+    </header>
+
+    <script>
+        // FIXED: Now uses localStorage and JWT logic
+        function updateAuthButton() {
+            const authBtn = document.getElementById('authBtn');
+            const token = localStorage.getItem('token');
+            if (token) {
+                authBtn.textContent = 'Logout';
+                authBtn.onclick = logout;
+            } else {
+                authBtn.textContent = 'Login / Register';
+                authBtn.onclick = () => window.location.href = 'login.html';
+            }
+        }
+
+        function handleAuthClick() {
+            if (localStorage.getItem('token')) {
+                logout();
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            sessionStorage.removeItem('loggedIn');
+            updateAuthButton();
+            alert('Logged out successfully!');
+            window.location.reload();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateAuthButton);
+    </script>
+
+    <section class="category-bar">
+        <button>Family</button>
+        <button>Bachelor</button>
+        <button>Office</button>
+        <button>Sublet</button>
+        <button>Hostel</button>
+        <button>Shop</button>
+    </section>
+
+    <section class="hero-slider">
+        <div class="slides">
+            <div class="slide"><img src="images/pic/slide1.jpg" alt="Slide 1"></div>
+            <div class="slide"><img src="images/pic/slide2.jpg" alt="Slide 2"></div>
+            <div class="slide"><img src="images/pic/slide3.jpg" alt="Slide 3"></div>
+            <div class="slide"><img src="images/pic/slide4.jpg" alt="Slide 4"></div>
+        </div>
+    </section>
+
+    <section class="properties">
+        <h2>Featured Properties</h2>
+        <p>BROWSE THE BEST AVAILABLE LISTINGS</p>
+        <div class="property-grid" id="featuredProperties">
+        </div>
+    </section>
+
+    <section class="properties">
+        <h2>Latest Articles & Tips</h2>
+        <p>EXPERT INSIGHTS & GUIDES FOR RENTERS</p>
+
+        <div class="articles-grid">
+            <div class="article-card">
+                <h3>নগরায়ন ও বিশ্বায়নের এ যুগে মানুষ শহরমুখী হচ্ছে</h3>
+                <div class="article-text">
+                    <p>নগরায়ন ও বিশ্বায়নের এ যুগে মানুষ শহরমুখী হচ্ছে। তুলনামূলক উন্নত জীবনযাপন অথবা জীবিকার তাগিদে...
+                    </p>
+                </div>
+                <button class="read-more" onclick="showArticle1()">Read More →</button>
+            </div>
+
+            <div class="article-card">
+                <h3>দালালদের কারণে যে সমস্যাগুলো হয়</h3>
+                <div class="article-text">
+                    <p>বাংলাদেশে বাসা ভাড়া দেওয়া বা নেওয়া মানেই যেন একটা যুদ্ধ! দালালদের কারণে যে সমস্যাগুলো হয়...
+                    </p>
+                </div>
+                <button class="read-more" onclick="showArticle2()">Read More →</button>
+            </div>
+
+            <div class="article-card">
+                <h3>ভাড়াটিয়ার অধিকার ও দায়িত্ব</h3>
+                <div class="article-text">
+                    <p>চমক একটি প্রাইভেট কোম্পানিতে চাকুরী করে। কাজের সুবাধে তার নতুন একটি জেলা শহরে পাড়ি জমাতে হয়...
+                    </p>
+                </div>
+                <button class="read-more" onclick="showArticle3()">Read More →</button>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="artical.html"
+                style="display: inline-block; background: #000; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; font-weight: bold;">View
+                All Articles</a>
+        </div>
+    </section>
+
+    <footer>
+        <p style="text-align: center; color: #666; padding: 20px;">© 2026 THE TOLET | Designed by Md Jihadul Islam Limon
+        </p>
+    </footer>
+
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeArticleModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody" class="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        function openArticleModal(title, content) {
+            const modal = document.getElementById('articleModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content.replace(/\n/g, '<br>');
+            modal.style.display = 'block';
+        }
+        function closeArticleModal() {
+            document.getElementById('articleModal').style.display = 'none';
+        }
+        function showArticle1() { openArticleModal('Tip 1', 'Content for tip 1'); }
+        function showArticle2() { openArticleModal('Tip 2', 'Content for tip 2'); }
+        function showArticle3() { openArticleModal('Tip 3', 'Content for tip 3'); }
+        window.onclick = function (e) { if (e.target === document.getElementById('articleModal')) closeArticleModal(); }
+    </script>
+</body>
+
+</html>

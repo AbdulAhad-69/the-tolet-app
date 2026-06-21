@@ -1,6 +1,6 @@
 // 1. Require path and configure dotenv at the very top
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
 // 2. Require other dependencies (Notice we removed the duplicate 'path' here)
 const express = require('express');

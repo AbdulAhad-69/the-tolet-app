@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login | THE TOLET</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+  <div class="login-box">
+    <h2>Login to THE TOLET</h2>
+
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="login-links">
+      <a href="#" onclick="toggleForgotPassword(event)">Forgot Password?</a>
+      <a href="#" onclick="toggleCreateAccount(event)">Create Account</a>
+    </div>
+
+    <!-- Forgot Password Form -->
+    <form id="forgotPasswordForm" style="display:none;">
+      <h3>Change Password</h3>
+      <input type="email" id="resetEmail" placeholder="Email" required>
+      <input type="password" id="newPassword" placeholder="New Password" required>
+      <button type="submit">Reset Password</button>
+      <a href="#" onclick="toggleForgotPassword(event)" class="back-link">Back to Login</a>
+    </form>
+
+    <!-- Create Account Form -->
+    <form id="createAccountForm" style="display:none;">
+      <h3>Create Account</h3>
+      <input type="text" id="fullName" placeholder="Full Name" required>
+      <input type="email" id="newEmail" placeholder="Email" required>
+      <input type="password" id="newAccountPassword" placeholder="Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+      <button type="submit">Create Account</button>
+      <a href="#" onclick="toggleCreateAccount(event)" class="back-link">Back to Login</a>
+    </form>
+  </div>
+
+  <script>
+    // Toggle Forms
+    function toggleForgotPassword(e) {
+      e.preventDefault();
+      document.getElementById('loginForm').style.display = document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
+      document.getElementById('forgotPasswordForm').style.display = document.getElementById('forgotPasswordForm').style.display === 'none' ? 'block' : 'none';
+      document.getElementById('createAccountForm').style.display = 'none';
+    }
+
+    function toggleCreateAccount(e) {
+      e.preventDefault();
+      document.getElementById('loginForm').style.display = document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
+      document.getElementById('createAccountForm').style.display = document.getElementById('createAccountForm').style.display === 'none' ? 'block' : 'none';
+      document.getElementById('forgotPasswordForm').style.display = 'none';
+    }
+
+    // Handle Login (API Integration)
+    async function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!email || !password) return alert("⚠️ Please fill in all fields");
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          sessionStorage.setItem('loggedIn', 'true');
+          localStorage.setItem('token', data.token); // Save JWT for protected routes
+          sessionStorage.setItem('userEmail', data.user.email);
+
+          alert("✅ Login successful!");
+          window.location.href = 'index.html';
+        } else {
+          alert(`❌ ${data.message || 'Invalid login details'}`);
+        }
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("❌ Error connecting to the server. Is your backend running?");
+      }
+    }
+
+    // Handle Create Account (API Integration)
+    async function handleCreateAccount(e) {
+      e.preventDefault();
+      const fullName = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('newEmail').value.trim();
+      const password = document.getElementById('newAccountPassword').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+      if (!fullName || !email || !password || !confirmPassword) return alert("⚠️ Please fill in all fields");
+      if (password !== confirmPassword) return alert("❌ Passwords do not match");
+
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert("✅ Account created successfully!\n\nYou can now login.");
+          document.getElementById('createAccountForm').reset();
+          toggleCreateAccount({ preventDefault: () => { } }); // Switch back to login view
+        } else {
+          alert(`❌ ${data.message || 'Failed to create account'}`);
+        }
+      } catch (error) {
+        console.error("Registration error:", error);
+        alert("❌ Error connecting to the server.");
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('loginForm').addEventListener('submit', handleLogin);
+      // Forgot password remains a UI placeholder for now unless you built the backend route for it
+      document.getElementById('createAccountForm').addEventListener('submit', handleCreateAccount);
+    });
+  </script>
+
+</body>
+
+</html>

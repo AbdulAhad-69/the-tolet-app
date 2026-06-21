@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property - THE TOLET</title>
+    <link rel="stylesheet" href="tolet-style.css">
+    <style>
+        .add-property-container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-property-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .form-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-submit {
+            background: #000000;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: #333333;
+        }
+
+        .btn-cancel {
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .add-property-container {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Header ===== -->
+    <header class="top-header">
+        <div class="logo">
+            <h2>THE TOLET</h2>
+            <p>House Rent Solution</p>
+        </div>
+
+        <nav>
+            <a href="index.html"><span>🏠</span> Home</a>
+            <a href="#">🏢 Property List</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="artical.html">📰 Article</a>
+        </nav>
+
+        <div class="header-btns">
+            <button id="authBtn" onclick="handleAuthClick()">Login / Register</button>
+        </div>
+    </header>
+
+    <!-- ===== Add Property Form ===== -->
+    <div class="add-property-container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <h1>Add New Property</h1>
+
+        <div class="success-message" id="successMessage">
+            ✅ Property added successfully! <a href="index.html">View all properties</a>
+        </div>
+
+        <form id="addPropertyForm">
+            <div class="form-group">
+                <label for="title">Property Title *</label>
+                <input type="text" id="title" name="title" placeholder="e.g., 2 Bed Apartment" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="area">Area/Location *</label>
+                    <input type="text" id="area" name="area" placeholder="e.g., Dhanmondi" required>
+                </div>
+                <div class="form-group">
+                    <label for="division">Division *</label>
+                    <select id="division" name="division" required>
+                        <option value="">Select Division</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Chattogram">Chattogram</option>
+                        <option value="Khulna">Khulna</option>
+                        <option value="Rajshahi">Rajshahi</option>
+                        <option value="Rangpur">Rangpur</option>
+                        <option value="Sylhet">Sylhet</option>
+                        <option value="Mymensingh">Mymensingh</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="rent">Monthly Rent (৳) *</label>
+                    <input type="number" id="rent" name="rent" placeholder="e.g., 15000" required>
+                </div>
+                <div class="form-group">
+                    <label for="bedroom">Number of Bedrooms *</label>
+                    <input type="number" id="bedroom" name="bedroom" min="0" placeholder="e.g., 2" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Property Type *</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Type</option>
+                    <option value="Family">Family</option>
+                    <option value="Bachelor">Bachelor</option>
+                    <option value="Office">Office</option>
+                    <option value="Sublet">Sublet</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Shop">Shop</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Property Image *</label>
+                <input type="file" id="image" name="image" accept="image/jpeg, image/png, image/jpg" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Describe your property..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact Phone *</label>
+                <input type="tel" id="contact" name="contact" placeholder="e.g., +880123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Contact Email *</label>
+                <input type="email" id="email" name="email" placeholder="e.g., owner@example.com" required>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" class="btn-submit">Add Property</button>
+                <button type="reset" class="btn-cancel">Clear</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 30px; padding: 0 20px;">
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Company</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">About Us</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Our Team</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">News Coverage</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Programs</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Affiliate Program</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Support</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">FAQ</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Legal</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Terms & Condition</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        <p style="text-align: center; color: #666;">© 2026 THE TOLET | Designed by Md Jihadul Islam Limon</p>
+    </footer>
+
+    <script>
+        function updateAuthButton() {
+            const authBtn = document.getElementById('authBtn');
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                authBtn.textContent = 'Logout';
+                authBtn.onclick = logout;
+            } else {
+                authBtn.textContent = 'Login / Register';
+                authBtn.onclick = () => window.location.href = 'login.html';
+            }
+        }
+
+        function handleAuthClick() {
+            if (sessionStorage.getItem('loggedIn') === 'true') logout();
+            else window.location.href = 'login.html';
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            localStorage.removeItem('token');
+            updateAuthButton();
+            alert('Logged out successfully!');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateAuthButton();
+
+            document.getElementById('addPropertyForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('Please login to add a property!');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Change Submit button text to show loading state
+                const submitBtn = document.querySelector('.btn-submit');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Uploading...';
+                submitBtn.disabled = true;
+
+                // Use FormData to handle both text and files
+                const formData = new FormData();
+                formData.append('title', document.getElementById('title').value);
+                formData.append('area', document.getElementById('area').value);
+                formData.append('division', document.getElementById('division').value);
+                formData.append('rent', document.getElementById('rent').value);
+                formData.append('bedroom', document.getElementById('bedroom').value);
+                formData.append('category', document.getElementById('category').value);
+                formData.append('description', document.getElementById('description').value);
+                formData.append('contact', document.getElementById('contact').value);
+                formData.append('email', document.getElementById('email').value);
+                formData.append('image', document.getElementById('image').files[0]);
+
+                try {
+                    // Send to Express Backend
+                    const response = await fetch('/api/properties', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                            // Do NOT set Content-Type here, browser sets it automatically with the correct boundary for FormData
+                        },
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        document.getElementById('successMessage').style.display = 'block';
+                        document.getElementById('addPropertyForm').reset();
+                        setTimeout(() => { document.getElementById('successMessage').style.display = 'none'; }, 3000);
+                    } else {
+                        alert(`❌ ${data.message || 'Failed to add property'}`);
+                    }
+                } catch (error) {
+                    alert("❌ Server error while uploading.");
+                    console.error(error);
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

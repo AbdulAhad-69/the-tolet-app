@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties - THE TOLET</title>
+    <link rel="stylesheet" href="tolet-style.css">
+    <style>
+        .category-page-container {
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #000000;
+            color: white;
+            border-color: #000000;
+        }
+
+        .properties-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .property-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .property-card p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .property-card button {
+            width: 100%;
+            padding: 10px;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .property-card button:hover {
+            background: #333333;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: #000000;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: #333333;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Header ===== -->
+    <header class="top-header">
+        <div class="logo">
+            <h2>THE TOLET</h2>
+            <p>House Rent Solution</p>
+        </div>
+
+        <nav>
+            <a href="index.html"><span>🏠</span> Home</a>
+            <a href="#">🏢 Property List</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="artical.html">📰 Article</a>
+        </nav>
+
+        <div class="header-btns">
+            <button onclick="window.location.href='add-property.html'">Add Property</button>
+            <button id="authBtn" onclick="handleAuthClick()">Login / Register</button>
+        </div>
+    </header>
+
+    <!-- ===== Category Page Content ===== -->
+    <div class="category-page-container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        
+        <div class="page-header">
+            <h1 id="categoryTitle">Properties</h1>
+            <p id="categoryDescription">Browse available properties</p>
+        </div>
+
+        <div class="filter-section" id="divisionFilter">
+            <!-- Division filters will be added here -->
+        </div>
+
+        <div class="properties-container" id="categoryProperties">
+            <!-- Properties will load here -->
+        </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 30px; padding: 0 20px;">
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Company</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">About Us</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Our Team</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">News Coverage</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Programs</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Affiliate Program</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Support</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">FAQ</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Legal</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Terms & Condition</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        <p style="text-align: center; color: #666;">© 2026 THE TOLET | Designed by Md Jihadul Islam Limon</p>
+    </footer>
+
+    <script>
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'All';
+        const division = urlParams.get('division');
+
+        let allProperties = [];
+        let filteredProperties = [];
+
+        // Load data and display
+        fetch("tolet-data.json")
+            .then(response => response.json())
+            .then(data => {
+                allProperties = data.properties;
+                
+                // Filter by division if provided
+                if (division) {
+                    filteredProperties = allProperties.filter(p => p.division === decodeURIComponent(division));
+                    document.getElementById('categoryTitle').textContent = decodeURIComponent(division) + ' Division';
+                    document.getElementById('categoryDescription').textContent = 
+                        `Found ${filteredProperties.length} properties in ${decodeURIComponent(division)}`;
+                    
+                    // Hide division filter for division pages
+                    document.getElementById('divisionFilter').style.display = 'none';
+                } else {
+                    // Filter by category
+                    if (category === 'All') {
+                        filteredProperties = allProperties;
+                    } else {
+                        filteredProperties = allProperties.filter(p => p.category === category);
+                    }
+                    
+                    document.getElementById('categoryTitle').textContent = category + ' Properties';
+                    document.getElementById('categoryDescription').textContent = 
+                        `Found ${filteredProperties.length} ${category.toLowerCase()} properties`;
+                    
+                    // Load divisions filter
+                    loadDivisionFilter();
+                }
+                
+                // Display properties
+                displayProperties(filteredProperties);
+            })
+            .catch(error => console.error("Error loading properties:", error));
+
+        // Load division filter buttons
+        function loadDivisionFilter() {
+            const divisions = [...new Set(filteredProperties.map(p => p.division))].sort();
+            const filterSection = document.getElementById('divisionFilter');
+            
+            const allBtn = document.createElement('button');
+            allBtn.className = 'filter-btn active';
+            allBtn.textContent = 'All Divisions';
+            allBtn.onclick = () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                allBtn.classList.add('active');
+                displayProperties(filteredProperties);
+            };
+            filterSection.appendChild(allBtn);
+            
+            divisions.forEach(division => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.textContent = division;
+                btn.onclick = () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filtered = filteredProperties.filter(p => p.division === division);
+                    displayProperties(filtered);
+                };
+                filterSection.appendChild(btn);
+            });
+        }
+
+        // Display properties
+        function displayProperties(properties) {
+            const container = document.getElementById('categoryProperties');
+            container.innerHTML = '';
+            
+            if (properties.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No properties found.</p>';
+                return;
+            }
+            
+            properties.forEach((property, index) => {
+                const originalIndex = allProperties.indexOf(property);
+                const card = document.createElement('div');
+                card.className = 'property-card';
+                card.onclick = () => {
+                    window.location.href = `property-details.html?id=${originalIndex}`;
+                };
+                const imgHtml = property.image ? `\n                    <img src="${encodeURI(property.image)}" alt="${property.title}" style="width:100%;height:180px;object-fit:cover;border-radius:6px 6px 0 0;display:block;margin-bottom:10px;">` : '';
+                card.innerHTML = `
+                    ${imgHtml}
+                    <h3>${property.title}</h3>
+                    <p>📍 ${property.area}, ${property.division}</p>
+                    <p>💰 Rent: ৳${property.rent}</p>
+                    <p>🛏 Bedrooms: ${property.bedroom}</p>
+                    <button onclick="event.stopPropagation()">View Details</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+
+    <script>
+        // Update auth button based on login status
+        function updateAuthButton() {
+            const authBtn = document.getElementById('authBtn');
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                authBtn.textContent = 'Logout';
+                authBtn.onclick = logout;
+            } else {
+                authBtn.textContent = 'Login / Register';
+                authBtn.onclick = () => window.location.href = 'login.html';
+            }
+        }
+
+        function handleAuthClick() {
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                logout();
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            updateAuthButton();
+            alert('Logged out successfully!');
+        }
+
+        // Check login status on page load
+        const originalDOMContentLoaded = document.addEventListener;
+        window.addEventListener('DOMContentLoaded', function() {
+            updateAuthButton();
+        }, { once: true });
+        
+        // Also update on immediate load for faster response
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', updateAuthButton);
+        } else {
+            updateAuthButton();
+        }
+    </script>
+
+</body>
+</html>

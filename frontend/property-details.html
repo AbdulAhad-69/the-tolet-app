@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details - THE TOLET</title>
+    <link rel="stylesheet" href="tolet-style.css">
+    <style>
+        .details-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .property-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            background: #f5f7fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #666;
+            overflow: hidden;
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-info h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .property-info .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: #f9f9f9;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #000000;
+        }
+
+        .detail-row .label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .detail-row .value {
+            color: #666;
+        }
+
+        .property-info .rent-section {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .rent-amount {
+            font-size: 36px;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .rent-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .action-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-contact {
+            background: #000000;
+            color: white;
+        }
+
+        .btn-contact:hover {
+            background: #333333;
+        }
+
+        .btn-save {
+            background: white;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .btn-save:hover {
+            background: #f5f5f5;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .property-details {
+                grid-template-columns: 1fr;
+            }
+
+            .thumbnail-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===== Header ===== -->
+    <header class="top-header">
+        <div class="logo">
+            <h2>THE TOLET</h2>
+            <p>House Rent Solution</p>
+        </div>
+
+        <nav>
+            <a href="index.html"><span>🏠</span> Home</a>
+            <a href="#">🏢 Property List</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="#">🤍 Saved</a>
+            <a href="artical.html">📰 Article</a>
+        </nav>
+
+        <div class="header-btns">
+            <button>Add Property</button>
+            <button onclick="window.location.href='login.html'">Login / Register</button>
+        </div>
+    </header>
+
+    <!-- ===== Property Details ===== -->
+    <div class="details-container">
+        <a href="index.html" class="back-link">← Back to Properties</a>
+
+        <div id="propertyDetailsContainer">
+            <!-- Property details will be loaded here -->
+        </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 30px; padding: 0 20px;">
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Company</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">About Us</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Our Team</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">News Coverage</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Programs</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Affiliate Program</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Support</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">FAQ</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Legal</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Terms & Condition</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        <p style="text-align: center; color: #666;">© 2026 THE TOLET | Designed by Md Jihadul Islam Limon</p>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const propertyId = urlParams.get('id');
+
+        if (!propertyId) {
+            document.getElementById('propertyDetailsContainer').innerHTML = '<p>Property not found. <a href="index.html">Go back</a></p>';
+        } else {
+            // Fetch single property from MongoDB
+            fetch(`/api/properties/${propertyId}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Not found");
+                    return response.json();
+                })
+                .then(property => {
+                    const container = document.getElementById('propertyDetailsContainer');
+                    const mainImage = property.imageUrl ? property.imageUrl : 'data:image/svg+xml,...'; // Default placeholder
+
+                    container.innerHTML = `
+                <div class="property-details">
+                    <div class="main-image">
+                        <img src="${mainImage}" alt="${property.title}">
+                    </div>
+                    <div class="property-info">
+                        <h1>${property.title}</h1>
+                        <div class="detail-row"><span class="label">📍 Location</span><span class="value">${property.area}, ${property.division}</span></div>
+                        <div class="detail-row"><span class="label">🛏 Bedrooms</span><span class="value">${property.bedroom}</span></div>
+                        <div class="detail-row"><span class="label">🏘 Division</span><span class="value">${property.division}</span></div>
+                        <div class="detail-row"><span class="label">🏷 Category</span><span class="value">${property.category}</span></div>
+                        ${property.description ? `<div style="margin-top:20px; color:#555;"><p>${property.description}</p></div>` : ''}
+
+                        <div class="rent-section">
+                            <div class="rent-label">Monthly Rent</div>
+                            <div class="rent-amount">৳${property.rent}</div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn-contact" onclick="alert('Contact: ${property.contact} \\nEmail: ${property.email}')">Contact Owner</button>
+                            <button class="btn-save" onclick="alert('Added to saved properties!')">💾 Save</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    document.getElementById('propertyDetailsContainer').innerHTML = '<p>Property not found. <a href="index.html">Go back</a></p>';
+                });
+        }
+    </script>
+
+</body>
+
+</html>

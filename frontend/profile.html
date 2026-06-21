@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - THE TOLET</title>
+    <link rel="stylesheet" href="tolet-style.css">
+    <style>
+        .profile-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .profile-header {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            margin: 0 auto 20px;
+        }
+
+        .profile-header h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .profile-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .profile-section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+        }
+
+        .profile-field {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-field:last-child {
+            border-bottom: none;
+        }
+
+        .profile-field .label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .profile-field .value {
+            color: #666;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background: #000000;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #333333;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #000000;
+            border: 2px solid #000000;
+        }
+
+        .btn-secondary:hover {
+            background: #f5f5f5;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-message {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .login-message p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                padding: 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== Header ===== -->
+    <header class="top-header">
+        <div class="logo">
+            <h2>THE TOLET</h2>
+            <p>House Rent Solution</p>
+        </div>
+
+        <nav>
+            <a href="index.html"><span>🏠</span> Home</a>
+
+            <div class="dropdown">
+                <a href="#" class="dropbtn">🏢 Property List ▼</a>
+                <div class="dropdown-content" id="propertyListDropdown">
+                    <a href="#">All Property</a>
+                </div>
+            </div>
+
+            <a href="profile.html">👤 Profile</a>
+            <a href="artical.html">📰 Article</a>
+        </nav>
+
+        <div class="header-btns">
+            <button onclick="window.location.href='add-property.html'">Add Property</button>
+            <button id="authBtn" onclick="handleAuthClick()">Login / Register</button>
+        </div>
+    </header>
+
+    <!-- ===== Profile Content ===== -->
+    <div class="profile-container">
+        <a href="index.html" class="back-link">← Back to Home</a>
+
+        <div id="profileContent">
+            <!-- Profile content will be loaded here -->
+        </div>
+    </div>
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto 30px; padding: 0 20px;">
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Company</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">About Us</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Our Team</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">News Coverage</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Programs</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Affiliate Program</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Support</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">FAQ</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 15px; color: #333;">Legal</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: #666; text-decoration: none;">Privacy Policy</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Terms & Condition</a></li>
+                    <li><a href="#" style="color: #666; text-decoration: none;">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+        <p style="text-align: center; color: #666;">© 2026 THE TOLET | Designed by Md Jihadul Islam Limon</p>
+    </footer>
+
+    <script src="property-list.js"></script>
+    <script>
+        // Update auth button based on login status
+        function updateAuthButton() {
+            const authBtn = document.getElementById('authBtn');
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                authBtn.textContent = 'Logout';
+                authBtn.onclick = logout;
+            } else {
+                authBtn.textContent = 'Login / Register';
+                authBtn.onclick = () => window.location.href = 'login.html';
+            }
+        }
+
+        function handleAuthClick() {
+            if (sessionStorage.getItem('loggedIn') === 'true') {
+                logout();
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('userEmail');
+            updateAuthButton();
+            window.location.href = 'index.html';
+        }
+
+        // Load profile content
+        function loadProfile() {
+            const isLoggedIn = sessionStorage.getItem('loggedIn') === 'true';
+            const profileContent = document.getElementById('profileContent');
+
+            if (isLoggedIn) {
+                const userEmail = sessionStorage.getItem('userEmail') || 'user@example.com';
+                profileContent.innerHTML = `
+                    <div class="profile-header">
+                        <div class="profile-avatar">👤</div>
+                        <h1>My Profile</h1>
+                        <p>Welcome back!</p>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2>Personal Information</h2>
+                        <div class="profile-field">
+                            <span class="label">Email</span>
+                            <span class="value">${userEmail}</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Account Status</span>
+                            <span class="value">Active</span>
+                        </div>
+                        <div class="profile-field">
+                            <span class="label">Member Since</span>
+                            <span class="value">2026</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h2>Quick Actions</h2>
+                        <div class="button-group">
+                            <button class="btn btn-primary" onclick="window.location.href='add-property.html'">Post Property</button>
+                            <button class="btn btn-secondary" onclick="alert('Change password feature coming soon!')">Change Password</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                profileContent.innerHTML = `
+                    <div class="login-message">
+                        <p>Please log in to view your profile</p>
+                        <button class="btn btn-primary" onclick="window.location.href='login.html'">Go to Login</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize page
+        updateAuthButton();
+        loadProfile();
+    </script>
+</body>
+</html>
